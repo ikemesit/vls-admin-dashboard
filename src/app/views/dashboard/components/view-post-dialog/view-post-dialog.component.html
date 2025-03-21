@@ -1,0 +1,49 @@
+<div class="flex flex-row justify-between items-center px-6 py-6 shadow">
+  <h4 class="font-bold text-2xl">View Article Details</h4>
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div mat-dialog-content>
+  <div class="grid grid-cols-12 gap-4">
+    <div class="col-span-12 flex flex-row gap-8">
+      <div
+        class="flex flex-col max-w-1/2 text-wrap break-words overflow-x-hidden"
+      >
+        <p class="m-0">Headline</p>
+        <p class="font-bold text-lg">{{ data.post.headline }}</p>
+      </div>
+
+      <div class="flex flex-col">
+        <p class="m-0">Date</p>
+        <p class="font-bold text-lg">
+          {{ data.post.createdAt | date : "medium" }}
+        </p>
+      </div>
+    </div>
+
+    <div class="col-span-12 my-2">
+      <mat-divider></mat-divider>
+    </div>
+
+    <div
+      class="col-span-12 min-h-64 bg-grey-100 border-slate-200 border-solid border-2 p-4 rounded-lg mb-4 text-wrap break-words overflow-x-hidden"
+    >
+      <span [innerHTML]="data.post.content"></span>
+    </div>
+
+    @if (data.post.featuredImage.length > 0) {
+    <div
+      class="col-span-2 h-48 border-2 border-slate-400 border-solid rounded-lg"
+    >
+      <app-image-viewer
+        [imageURL]="data.post.featuredImage"
+        [showDeleteIcon]="false"
+      ></app-image-viewer>
+    </div>
+    }
+  </div>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</div>

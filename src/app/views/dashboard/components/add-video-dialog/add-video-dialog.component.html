@@ -1,0 +1,77 @@
+<div class="flex flex-row justify-between items-center px-12 py-6 shadow">
+  <h4 class="font-bold text-2xl">Add a video</h4>
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div matDialogContent class="min-h-64">
+  <div class="w-full grid grid-cols-12 gap-2">
+    <!-- <div class="col-span-6 min-h-[600px] p-8">
+      @if (showVideoPlayer) {
+      <youtube-player [videoId]="videoId"></youtube-player>
+      <video [src]="videoUrl" controls></video>
+      } @else {
+      <div
+        class="h-full w-full border-dashed bg-slate-300 border-2 flex flex-col justify-center items-center p-8"
+      >
+        <span class="font-medium text-center">
+          Please enter a video URL and click "verify" to confirm your video is
+          working correctly before saving.
+        </span>
+      </div>
+      }
+    </div> -->
+    <div class="col-span-12 min-h-64 p-8 flex flex-col justify-start">
+      <div class="w-full grid grid-cols-12 gap-4">
+        <div class="col-span-12">
+          <p class="mb-2 font-bold">Enter Video Details</p>
+        </div>
+        <div class="col-span-12">
+          <mat-form-field class="w-full mb-4">
+            <mat-label>Enter video title</mat-label>
+            <input [(ngModel)]="title" matInput placeholder="Video Title" />
+          </mat-form-field>
+          <mat-form-field class="w-full">
+            <mat-label>Enter video URL</mat-label>
+            <input [(ngModel)]="videoUrl" matInput placeholder="Video Url" />
+          </mat-form-field>
+          <!-- <span class="flex flex-row justify-end mt-4">
+            <button mat-button class="mr-4" (click)="clearVideo()">
+              Clear
+            </button>
+            <button mat-flat-button (click)="verifyVideo()">Verify</button>
+          </span> -->
+        </div>
+
+        @if (thumbnailUrl.length > 0) {
+        <div class="col-span-4 h-48">
+          <p class="mb-2 font-bold">Video thumbnail</p>
+          <app-image-viewer [imageURL]="thumbnailUrl"></app-image-viewer>
+        </div>
+        } @else {
+        <div class="col-span-12">
+          <p class="mb-2 font-bold">Add Video thumbnail</p>
+          <app-image-uploader
+            class="w-full"
+            [maximumFilesSelection]="1"
+            [path]="'video_thumbnails'"
+            (uploadComplete)="getThumbnailUrl($event)"
+          ></app-image-uploader>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions align="end">
+  <div class="flex gap-4">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button
+      mat-stroked-button
+      [disabled]="videoUrl.length === 0 || title.length === 0"
+      (click)="saveVideo()"
+    >
+      Save Video
+    </button>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+table {
+  width: 100%;
+}
+
+th,
+td {
+  white-space: nowrap;
+}
+
+.mat-column-headline {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mat-column-description {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

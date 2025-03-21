@@ -1,0 +1,79 @@
+<div class="flex flex-row justify-between items-center px-6 py-6 shadow">
+  <h4 class="font-bold text-2xl">View Event Details</h4>
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div mat-dialog-content>
+  <div class="grid grid-cols-12">
+    <div
+      class="col-span-7 h-full border-r-2 border-slate-200 border-solid grid grid-cols-12 gap-4"
+    >
+      <div
+        class="col-span-6 flex flex-col justify-start p-4 items-center border-2 border-solid border-slate-200 rounded"
+      >
+        <span class="font-medium m-0">Target Amount</span>
+        <span class="font-bold text-6xl m-0">{{
+          data.campaign.targetAmount
+        }}</span>
+      </div>
+      <div
+        class="col-span-6 flex flex-col justify-start p-4 items-center border-2 border-solid border-slate-200 rounded"
+      >
+        <span class="font-medium m-0">Donated Amount</span>
+        <span class="font-bold text-6xl m-0">{{
+          data.campaign.donatedAmount
+        }}</span>
+      </div>
+      <div class="relative my-4 rounded w-18 h-12 overflow-hidden">
+        <img
+          [ngSrc]="data.campaign.coverImage"
+          alt=""
+          fill
+          class="object-cover"
+        />
+      </div>
+    </div>
+
+    <div class="col-span-5 flex flex-col justify-center items-center">
+      <h2 class="font-bold text-2xl">{{ data.campaign.title }}</h2>
+      <p class="text-sm">
+        {{ data.campaign.createdAt.toDate() | date : "medium" }}
+      </p>
+    </div>
+
+    <!-- <div class="col-span-12 flex flex-row gap-8">
+      <div
+        class="flex flex-col max-w-1/2 text-wrap break-words overflow-x-hidden"
+      >
+        <p class="font-medium m-0">Title</p>
+        <p class="font-bold text-lg">{{ data.campaign.title }}</p>
+      </div>
+
+      <div class="flex flex-col">
+        <p class="font-medium m-0">Date</p>
+        <p class="font-bold text-lg">
+          {{ data.campaign.createdAt.toDate() | date : "medium" }}
+        </p>
+      </div>
+    </div>
+
+    <div class="col-span-12 my-2">
+      <mat-divider></mat-divider>
+    </div>
+
+    <div
+      class="col-span-12 min-h-64 bg-grey-100 border-slate-200 border-solid border-2 p-4 rounded-lg mb-4 text-wrap break-words overflow-x-hidden"
+    >
+      <span [innerHTML]="data.event.description"></span>
+    </div> -->
+
+    <!-- <app-image-uploader
+      class="col-span-12"
+      [imageURLs]="data.event.images"
+    ></app-image-uploader> -->
+  </div>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</div>

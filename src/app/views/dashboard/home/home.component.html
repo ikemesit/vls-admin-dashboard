@@ -1,0 +1,26 @@
+<div class="w-full flex flex-col gap-4">
+  <h2 class="font-bold uppercase text-2xl">Banners</h2>
+
+  <app-image-uploader
+    [path]="'banners'"
+    (uploadComplete)="updateBannerList($event, 'UPLOAD')"
+  ></app-image-uploader>
+  <div
+    class="grid grid-cols-12 gap-4 bg-slate-200 p-4 border-dashed border-2 border-slate-400 rounded-lg"
+  >
+    <div class="col-span-12">
+      <h4 class="font-bold">Current Banners</h4>
+    </div>
+    @for(banner of currentBanners; track banner) {
+    <div
+      class="h-48 col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2 bg-center bg-cover rounded-lg border-2 border-slate-500"
+    >
+      <app-image-viewer
+        [imageURL]="banner"
+        (deleteEvent)="updateBannerList([$event], 'DELETE')"
+      ></app-image-viewer>
+    </div>
+
+    }
+  </div>
+</div>

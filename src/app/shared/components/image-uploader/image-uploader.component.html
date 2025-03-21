@@ -1,0 +1,92 @@
+<div class="w-full grid grid-cols-12 gap-4">
+  <ng-container *ngIf="!imageURLs()">
+    <div class="col-span-12 w-full">
+      <ng-container *ngIf="this.selectedFiles && this.selectedFiles.length > 0">
+        <button
+          class="h-12 w-auto mr-4"
+          mat-stroked-button
+          (click)="uploadFiles($event)"
+        >
+          <mat-icon>upload</mat-icon>
+
+          Upload files
+        </button>
+        <button
+          class="h-12 w-auto"
+          mat-button
+          (click)="clearSelections($event)"
+        >
+          Clear selection
+        </button>
+      </ng-container>
+      <ng-container
+        *ngIf="!this.selectedFiles || this.selectedFiles.length === 0"
+      >
+        <label
+          for="file-upload"
+          class="h-12 w-auto rounded-lg border-dashed border-2 border-slate-400 flex flex-col justify-center items-center hover:bg-slate-200 hover:cursor-pointer"
+        >
+          <input
+            #filesInput
+            id="file-upload"
+            class="hidden"
+            type="file"
+            (change)="onFileSelected($event)"
+            multiple
+            accept=".jpg,.png,.gif"
+          />
+          <span class="flex flex-row justify-start items-center">
+            <mat-icon>add</mat-icon>
+            Select image(s) to add
+          </span>
+        </label>
+      </ng-container>
+    </div>
+    <div class="col-span-12" *ngIf="showErrorMessages">
+      <span
+        *ngFor="let error of errorMessages"
+        class="text-red-500 font-bold"
+        >{{ error }}</span
+      >
+    </div>
+    <div
+      *ngFor="let file of selectedFiles; let i = index"
+      [id]="'file' + i"
+      class="h-48 col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2 bg-center bg-cover border-2 border-slate-400 flex flex-col justify-between rounded-lg"
+    >
+      <button mat-icon-button (click)="deselectFile(i, $event)" class="">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <div class="w-full p-2">
+        <mat-progress-bar
+          *ngIf="uploadProgress[i] !== undefined"
+          [mode]="progressBarMode"
+          [value]="uploadProgress[i] | number : '1.0-0'"
+          [bufferValue]="uploadProgress[i]"
+        >
+        </mat-progress-bar>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="imageURLs()">
+    <div
+      #imagePreview
+      *ngFor="let url of images; let i = index"
+      [ngStyle]="{ background: +'url(' + url + ')' }"
+      class="h-48 col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2 relative border-2 border-slate-400 flex flex-col justify-between rounded-lg overflow-hidden"
+    >
+      <img
+        [src]="url"
+        alt=""
+        class="object-cover w-full h-full absolute bottom-0 left-0 top-0 right-0"
+      />
+      <button
+        mat-icon-button
+        (click)="deleteFile(url, $event)"
+        class="absolute -end-full left-0"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </ng-container>
+</div>
