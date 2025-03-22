@@ -27,6 +27,8 @@
     "aos": "^2.3.4",
     "date-fns": "^4.1.0",
     "lodash": "^4.17.21",
+    "lottie-web": "^5.12.2",
+    "ngx-lottie": "^13.0.1",
     "ngx-quill": "^27.0.0",
     "ngx-spinner": "^19.0.0",
     "ngx-toastr": "^19.0.0",

@@ -70,4 +70,32 @@ export class VolunteerService {
     }
     return count ? count : 0;
   }
+
+  public async fetchAdVolunteers(adId: number): Promise<
+    | {
+        ad_id: string;
+        user_profiles: {
+          email: string;
+          phone: string;
+          lastname: string;
+          firstname: string;
+        }[];
+      }[]
+    | null
+  > {
+    try {
+      const { data, error } = await this._supabase
+        .from('volunteer_users')
+        .select(`ad_id, user_profiles(firstname, lastname, email, phone)`)
+        .eq('ad_id', adId);
+
+      if (error) {
+        throw error;
+      }
+
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
 }

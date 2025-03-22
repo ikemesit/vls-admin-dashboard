@@ -1,0 +1,93 @@
+<div
+  class="flex flex-row justify-between items-center px-6 py-6 shadow bg-white"
+>
+  <h4 class="font-bold text-2xl">View Advert Details</h4>
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div mat-dialog-content>
+  <div class="grid grid-cols-12 gap-4">
+    <div class="col-span-12 flex flex-row gap-8">
+      <div
+        class="flex flex-col max-w-1/2 text-wrap break-words overflow-x-hidden"
+      >
+        <p class="m-0">Title</p>
+        <p class="font-bold text-lg">{{ data.ad.title }}</p>
+      </div>
+
+      <div class="flex flex-col">
+        <p class="m-0">Date</p>
+        <p class="font-bold text-lg">
+          {{ data.ad.createdAt | date : "medium" }}
+        </p>
+      </div>
+    </div>
+
+    <div class="col-span-12 my-2">
+      <mat-divider></mat-divider>
+    </div>
+
+    <div class="col-span-12 min-h-64 bg-white">
+      <h4 class="font-bold mb-4">Volunteers</h4>
+
+      <div class="border-2 border-gray-200 border-solid">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="firstname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              First Name
+            </th>
+            <td mat-cell *matCellDef="let user">
+              {{ user?.firstname }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="lastname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
+            <td mat-cell *matCellDef="let user">
+              {{ user?.lastname }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+            <td mat-cell *matCellDef="let user">
+              {{ user?.email }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone</th>
+            <td mat-cell *matCellDef="let user">
+              {{ user?.phone }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+          <!-- Row shown when there is no matching data. -->
+          <tr class="w-full" *matNoDataRow>
+            <td class="h-64" colspan="3">
+              <div class="flex flex-col justify-center items-center">
+                <img src="/images/no-data.png" alt="" width="200px" />
+                <span class="font-bold uppercase">No data</span>
+              </div>
+            </td>
+          </tr>
+        </table>
+
+        <mat-paginator
+          [pageSizeOptions]="pageSizes"
+          [length]="dataLength"
+          showFirstLastButtons
+          aria-label="Select page of users"
+        >
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</div>

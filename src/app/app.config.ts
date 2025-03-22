@@ -13,6 +13,8 @@ import { provideQuillConfig } from 'ngx-quill/config';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { provideToastr } from 'ngx-toastr';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { provideLottieOptions } from 'ngx-lottie';
+import player from 'lottie-web';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -43,5 +45,8 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(
       NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
     ),
+    provideLottieOptions({
+      player: () => player,
+    }),
   ],
 };

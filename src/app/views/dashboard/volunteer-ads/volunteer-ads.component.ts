@@ -15,6 +15,7 @@ import { ConfirmActionDialogComponent } from '../../../shared/components/confirm
 import { NewVolunteerAdDialogComponent } from '../components/new-volunteer-ad-dialog/new-volunteer-ad-dialog.component';
 import { EditVolunteerAdDialogComponent } from '../components/edit-volunteer-ad-dialog/edit-volunteer-ad-dialog.component';
 import { DatePipe } from '@angular/common';
+import { ViewVolunteerAdDialogComponent } from '../components/view-volunteer-ad-dialog/view-volunteer-ad-dialog.component';
 
 @Component({
   selector: 'app-volunteer-ads',
@@ -92,7 +93,7 @@ export class VolunteerAdsComponent {
   }
 
   public viewAdDetails(ad: VolunteerAd): void {
-    this._dialog.open(EditVolunteerAdDialogComponent, {
+    this._dialog.open(ViewVolunteerAdDialogComponent, {
       height: 'calc(100% - 30px)',
       width: 'calc(100% - 30px)',
       maxWidth: '100%',
@@ -100,8 +101,6 @@ export class VolunteerAdsComponent {
       backdropClass: 'modal-backdrop',
       panelClass: 'mat-dialog-override',
       data: {
-        title: 'View Ad',
-        action: 'view',
         ad,
       },
     });

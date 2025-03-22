@@ -10,7 +10,7 @@ import {
 
 @Component({
   selector: 'app-confirm-action-dialog',
-  imports: [MatDialogContent, MatDialogActions, MatDialogClose, MatDialogTitle],
+  imports: [MatDialogContent, MatDialogActions, MatDialogClose],
   templateUrl: './confirm-action-dialog.component.html',
   styleUrl: './confirm-action-dialog.component.scss',
 })

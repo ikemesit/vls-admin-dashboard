@@ -74,21 +74,26 @@ export class AuthenticationService {
     return this._supabase.storage.from('avatars').upload(filePath, file);
   }
 
-  async updatePassword(newPassword: string) {
+  async updatePassword(email: string, newPassword: string) {
     try {
       // const url = new URL(window.location.href);
-      // const accessToken =
-      //   url.searchParams.get('code') ||
-      //   new URLSearchParams(url.hash.substring(1)).get('code');
 
-      // if (!accessToken) {
+      // const accessToken =
+      //   url.searchParams.get('access_token') ||
+      //   new URLSearchParams(url.hash.substring(1)).get('access_token');
+
+      // const refreshToken =
+      //   url.searchParams.get('refresh_token') ||
+      //   new URLSearchParams(url.hash.substring(1)).get('refresh_token');
+
+      // if (accessToken.length === 0) {
       //   throw new Error('No access token found in URL');
       // }
 
       // const { data: sessionData, error: sessionError } =
       //   await this._supabase.auth.setSession({
       //     access_token: accessToken,
-      //     refresh_token: '',
+      //     refresh_token: refreshToken.length > 0 ? refreshToken : '',
       //   });
 
       // if (sessionError) {
@@ -97,11 +102,12 @@ export class AuthenticationService {
       // }
 
       const { data, error } = await this._supabase.auth.updateUser({
-        // email: email,
+        email,
         password: newPassword,
       });
 
       if (error) {
+        console.log(error);
         throw error;
       }
 
@@ -111,6 +117,7 @@ export class AuthenticationService {
         data,
       };
     } catch (error) {
+      console.log(error);
       return {
         success: false,
         message: `Error updating password: ${error}`,
